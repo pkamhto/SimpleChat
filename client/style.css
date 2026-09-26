@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+
+.chat-container {
+    width: 400px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#chatBox {
+    height: 400px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.message {
+    padding: 10px 14px;
+    border-radius: 15px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.my-message {
+    align-self: flex-end;
+    background: #d9fdd3;
+}
+
+.other-message {
+    align-self: flex-start;
+    background: #eeeeee;
+}
+
+.message-area {
+    display: flex;
+    gap: 10px;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+}
+
+#sendButton {
+    padding: 10px 20px;
+    cursor: pointer;
+}
