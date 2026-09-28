@@ -2,89 +2,895 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Create Account - SimpleChat</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =========================================
+           REGISTER PAGE
+        ========================================= */
+
+        body.register-page {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8f5f2,
+                    #f4f7fb,
+                    #eaf1ff
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px 15px;
+
+            color: #172033;
+
+        }
+
+
+        /* =========================================
+           MAIN CARD
+        ========================================= */
+
+        .register-card {
+
+            width: 100%;
+
+            max-width: 540px;
+
+            background: #ffffff;
+
+            border-radius: 24px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(25,45,75,0.15);
+
+        }
+
+
+        /* =========================================
+           BRAND
+        ========================================= */
+
+        .register-brand {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .register-logo {
+
+            width: 58px;
+
+            height: 58px;
+
+            margin: 0 auto 12px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075e54,
+                    #128c7e
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 29px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(18,140,126,0.22);
+
+        }
+
+
+        .register-brand h1 {
+
+            margin: 0;
+
+            color: #172033;
+
+            font-size: 25px;
+
+        }
+
+
+        .register-brand p {
+
+            margin: 7px 0 0;
+
+            color: #7c8795;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        #registerForm {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+
+        }
+
+
+        /* =========================================
+           FIELD GROUP
+        ========================================= */
+
+        .field-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 6px;
+
+        }
+
+
+        .field-label {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #536071;
+
+        }
+
+
+        .optional {
+
+            color: #9aa2ad;
+
+            font-weight: 400;
+
+        }
+
+
+        /* =========================================
+           INPUTS
+        ========================================= */
+
+        #registerForm input,
+        #registerForm select {
+
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 14px;
+
+            border: 1px solid #dce2e8;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            background: #f9fafb;
+
+            color: #172033;
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+
+        }
+
+
+        #registerForm input:focus,
+        #registerForm select:focus {
+
+            background: #ffffff;
+
+            border-color: #128c7e;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(18,140,126,0.10);
+
+        }
+
+
+        #registerForm input::placeholder {
+
+            color: #a1a9b3;
+
+        }
+
+
+        /* =========================================
+           MOBILE + OTP ROW
+        ========================================= */
+
+        .otp-row {
+
+            display: flex;
+
+            gap: 8px;
+
+        }
+
+
+        .otp-row input {
+
+            flex: 1;
+
+            min-width: 0;
+
+        }
+
+
+        .otp-row button {
+
+            width: 105px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        /* =========================================
+           OTP CONTROLS CREATED BY JS
+        ========================================= */
+
+        #registerForm > button {
+
+            border: none;
+
+            height: 46px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075e54,
+                    #128c7e
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+
+            box-shadow:
+                0 6px 16px
+                rgba(18,140,126,0.18);
+
+        }
+
+
+        #registerForm > button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 9px 20px
+                rgba(18,140,126,0.25);
+
+        }
+
+
+        /* =========================================
+           CREATE ACCOUNT BUTTON
+        ========================================= */
+
+        #registerForm > button[type="submit"] {
+
+            height: 50px;
+
+            margin-top: 5px;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =========================================
+           PASSWORD WRAPPER
+        ========================================= */
+
+        .password-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .password-wrapper input {
+
+            padding-right: 48px !important;
+
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 10px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+            color: #737d8a;
+
+            width: 35px;
+
+            height: 35px;
+
+        }
+
+
+        /* =========================================
+           MESSAGE
+        ========================================= */
+
+        #message {
+
+            min-height: 20px;
+
+            margin: 15px 0 0;
+
+            padding: 10px 12px;
+
+            border-radius: 10px;
+
+            background: #f4f6f8;
+
+            color: #667180;
+
+            font-size: 13px;
+
+            text-align: center;
+
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .register-footer {
+
+            margin-top: 22px;
+
+            padding-top: 18px;
+
+            border-top: 1px solid #edf0f3;
+
+            text-align: center;
+
+        }
+
+
+        .register-footer p {
+
+            margin: 0;
+
+            color: #7c8795;
+
+            font-size: 13px;
+
+        }
+
+
+        .register-footer a {
+
+            color: #075e54;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+        }
+
+
+        .register-footer a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        .security-note {
+
+            margin-top: 12px !important;
+
+            font-size: 11px !important;
+
+            color: #a0a7b0 !important;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 560px) {
+
+            body.register-page {
+
+                padding: 0;
+
+                align-items: stretch;
+
+            }
+
+
+            .register-card {
+
+                min-height: 100vh;
+
+                border-radius: 0;
+
+                padding: 25px 20px;
+
+                box-shadow: none;
+
+            }
+
+
+            .otp-row {
+
+                flex-direction: column;
+
+            }
+
+
+            .otp-row button {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
 </head>
 
-<body>
 
-    <div class="chat-container">
+<body class="register-page">
 
-        <h2>Create Account</h2>
+
+    <div class="register-card">
+
+
+        <!-- =====================================
+             BRAND
+        ====================================== -->
+
+        <div class="register-brand">
+
+            <div class="register-logo">
+                💬
+            </div>
+
+            <h1>
+                Create your account
+            </h1>
+
+            <p>
+                Join SimpleChat and start connecting
+            </p>
+
+        </div>
+
+
+
+        <!-- =====================================
+             FORM
+        ====================================== -->
 
         <form id="registerForm">
 
-            <input
-                type="text"
-                id="name"
-                placeholder="Full Name"
-                required
+
+            <!-- FULL NAME -->
+
+            <div class="field-group">
+
+                <label
+                    class="field-label"
+                    for="name"
+                >
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- DATE OF BIRTH -->
+
+            <div class="field-group">
+
+                <label
+                    class="field-label"
+                    for="dateOfBirth"
+                >
+                    Date of Birth
+                </label>
+
+                <input
+                    type="date"
+                    id="dateOfBirth"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- GENDER -->
+
+            <div class="field-group">
+
+                <label
+                    class="field-label"
+                    for="gender"
+                >
+                    Gender
+                </label>
+
+                <select
+                    id="gender"
+                    required
+                >
+
+                    <option value="">
+                        Select Gender
+                    </option>
+
+                    <option value="Male">
+                        Male
+                    </option>
+
+                    <option value="Female">
+                        Female
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- MOBILE -->
+
+            <div class="field-group">
+
+                <label
+                    class="field-label"
+                    for="mobile"
+                >
+                    Mobile Number
+                </label>
+
+                <div class="otp-row">
+
+                    <input
+                        type="tel"
+                        id="mobile"
+                        placeholder="10-digit mobile number"
+                        maxlength="10"
+                        minlength="10"
+                        pattern="[6-9][0-9]{9}"
+                        inputmode="numeric"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="field-group">
+
+                <label
+                    class="field-label"
+                    for="email"
+                >
+                    Email
+                    <span class="optional">
+                        (Optional)
+                    </span>
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email address"
+                    autocomplete="email"
+                >
+
+            </div>
+
+
+
+            <!-- USERNAME -->
+
+            <div class="field-group">
+
+                <label
+                    class="field-label"
+                    for="username"
+                >
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Choose a unique username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- PASSWORD -->
+
+            <div class="field-group">
+
+                <label
+                    class="field-label"
+                    for="password"
+                >
+                    Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        data-target="password"
+                        aria-label="Show password"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="field-group">
+
+                <label
+                    class="field-label"
+                    for="confirmPassword"
+                >
+                    Confirm Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        data-target="confirmPassword"
+                        aria-label="Show password"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CREATE ACCOUNT -->
+
+            <button
+                type="submit"
             >
-
-            <input
-                type="date"
-                id="dateOfBirth"
-                required
-            >
-
-            <select id="gender" required>
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-
-            <input
-    type="tel"
-    id="mobile"
-    placeholder="10-digit Mobile Number"
-    maxlength="10"
-    minlength="10"
-    pattern="[6-9][0-9]{9}"
-    inputmode="numeric"
-    required
->
-
-            <input
-                type="email"
-                id="email"
-                placeholder="Email (Optional)"
-            >
-
-            <input
-                type="text"
-                id="username"
-                placeholder="Choose Username"
-                required
-            >
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                required
-            >
-
-            <input
-                type="password"
-                id="confirmPassword"
-                placeholder="Confirm Password"
-                required
-            >
-
-            <button type="submit">
                 Create Account
             </button>
 
+
         </form>
+
+
+
+        <!-- =====================================
+             MESSAGE
+        ====================================== -->
 
         <p id="message"></p>
 
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <div class="register-footer">
+
+            <p>
+
+                Already have an account?
+
+                <a href="/login.html">
+                    Login
+                </a>
+
+            </p>
+
+            <p class="security-note">
+                🔒 Your account information is securely protected.
+            </p>
+
+        </div>
+
+
     </div>
 
+
+
+    <!-- EXISTING REGISTRATION LOGIC -->
+
     <script src="register.js"></script>
+
+
+    <!-- PASSWORD SHOW / HIDE -->
+
+    <script>
+
+        document
+            .querySelectorAll(".password-toggle")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const targetId =
+                            button.dataset.target;
+
+                        const input =
+                            document.getElementById(
+                                targetId
+                            );
+
+                        if (
+                            input.type === "password"
+                        ) {
+
+                            input.type = "text";
+
+                            button.textContent = "🙈";
+
+                            button.setAttribute(
+                                "aria-label",
+                                "Hide password"
+                            );
+
+                        } else {
+
+                            input.type = "password";
+
+                            button.textContent = "👁️";
+
+                            button.setAttribute(
+                                "aria-label",
+                                "Show password"
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+    </script>
+
 
 </body>
 

@@ -2,68 +2,781 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Forgot Username - SimpleChat</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =========================================
+           FORGOT USERNAME PAGE
+        ========================================= */
+
+        body.forgot-page {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8f5f2,
+                    #f4f7fb,
+                    #eaf1ff
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 25px 15px;
+
+            color: #172033;
+
+        }
+
+
+        /* =========================================
+           CARD
+        ========================================= */
+
+        .forgot-card {
+
+            width: 100%;
+
+            max-width: 450px;
+
+            background: #ffffff;
+
+            border-radius: 24px;
+
+            padding: 34px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(25,45,75,0.15);
+
+        }
+
+
+        /* =========================================
+           BRAND
+        ========================================= */
+
+        .forgot-brand {
+
+            text-align: center;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .forgot-logo {
+
+            width: 60px;
+
+            height: 60px;
+
+            margin: 0 auto 14px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075e54,
+                    #128c7e
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 29px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(18,140,126,0.22);
+
+        }
+
+
+        .forgot-brand h1 {
+
+            margin: 0;
+
+            font-size: 25px;
+
+            color: #172033;
+
+        }
+
+
+        .forgot-brand p {
+
+            margin: 8px 0 0;
+
+            color: #7c8795;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =========================================
+           INFO BOX
+        ========================================= */
+
+        .info-box {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            padding: 12px 14px;
+
+            margin-bottom: 20px;
+
+            background: #f0faf8;
+
+            border: 1px solid #d9eee9;
+
+            border-radius: 12px;
+
+            color: #536b68;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .info-icon {
+
+            font-size: 16px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        /* =========================================
+           FIELD
+        ========================================= */
+
+        .field-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .field-label {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #536071;
+
+        }
+
+
+        #mobile,
+        #otp {
+
+            width: 100%;
+
+            height: 49px;
+
+            padding: 0 14px;
+
+            border: 1px solid #dce2e8;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            background: #f9fafb;
+
+            color: #172033;
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+
+            box-sizing: border-box;
+
+        }
+
+
+        #mobile:focus,
+        #otp:focus {
+
+            background: #ffffff;
+
+            border-color: #128c7e;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(18,140,126,0.10);
+
+        }
+
+
+        #mobile::placeholder,
+        #otp::placeholder {
+
+            color: #a1a9b3;
+
+        }
+
+
+        /* =========================================
+           BUTTONS
+        ========================================= */
+
+        .action-button {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075e54,
+                    #128c7e
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 6px 16px
+                rgba(18,140,126,0.18);
+
+            transition: 0.2s ease;
+
+        }
+
+
+        .action-button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 9px 20px
+                rgba(18,140,126,0.25);
+
+        }
+
+
+        .action-button:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        /* =========================================
+           OTP AREA
+        ========================================= */
+
+        #otpSection {
+
+            display: none;
+
+            margin-top: 20px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #edf0f3;
+
+        }
+
+
+        .otp-title {
+
+            margin: 0 0 6px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #172033;
+
+        }
+
+
+        .otp-subtitle {
+
+            margin: 0 0 13px;
+
+            color: #8a929e;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================
+           MESSAGE
+        ========================================= */
+
+        #message {
+
+            min-height: 18px;
+
+            margin: 15px 0 0;
+
+            padding: 9px 12px;
+
+            border-radius: 10px;
+
+            background: #f4f6f8;
+
+            color: #667180;
+
+            font-size: 12px;
+
+            text-align: center;
+
+        }
+
+
+        /* =========================================
+           USERNAME RESULT
+        ========================================= */
+
+        #usernameResult {
+
+            margin: 15px 0 0;
+
+            padding: 16px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0faf8,
+                    #f5fbfa
+                );
+
+            border: 1px solid #cfe8e2;
+
+            color: #075e54;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            text-align: center;
+
+            word-break: break-word;
+
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .forgot-footer {
+
+            margin-top: 24px;
+
+            padding-top: 18px;
+
+            border-top: 1px solid #edf0f3;
+
+            text-align: center;
+
+        }
+
+
+        .forgot-footer a {
+
+            color: #075e54;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+        }
+
+
+        .forgot-footer a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        .create-account {
+
+            margin-top: 12px;
+
+            color: #8a929e;
+
+            font-size: 12px;
+
+        }
+
+
+        .create-account a {
+
+            font-size: 12px;
+
+        }
+
+
+        .security-note {
+
+            margin-top: 13px;
+
+            color: #a0a7b0;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 500px) {
+
+            body.forgot-page {
+
+                padding: 0;
+
+                align-items: stretch;
+
+            }
+
+
+            .forgot-card {
+
+                min-height: 100vh;
+
+                border-radius: 0;
+
+                padding: 28px 20px;
+
+                box-shadow: none;
+
+            }
+
+        }
+
+    </style>
+
 </head>
 
-<body>
 
-    <div class="chat-container">
+<body class="forgot-page">
 
-        <h2>Forgot Username</h2>
 
-        <p>
-            Enter your registered mobile number.
-        </p>
+    <div class="forgot-card">
 
-        <input
-            type="tel"
-            id="mobile"
-            placeholder="10-digit Mobile Number"
-            maxlength="10"
-            minlength="10"
-            pattern="[6-9][0-9]{9}"
-            inputmode="numeric"
-        >
 
-        <button type="button" id="sendOtpButton">
-            Send OTP
-        </button>
+        <!-- =====================================
+             BRAND
+        ====================================== -->
 
-        <br><br>
+        <div class="forgot-brand">
 
-        <input
-            type="text"
-            id="otp"
-            placeholder="Enter 6-digit OTP"
-            maxlength="6"
-            inputmode="numeric"
-            style="display: none;"
-        >
+            <div class="forgot-logo">
+                🔑
+            </div>
+
+            <h1>
+                Forgot Username?
+            </h1>
+
+            <p>
+                Don't worry. Verify your registered
+                mobile number to recover your username.
+            </p>
+
+        </div>
+
+
+
+        <!-- =====================================
+             INFO
+        ====================================== -->
+
+        <div class="info-box">
+
+            <span class="info-icon">
+                🔐
+            </span>
+
+            <span>
+                We'll send a verification OTP to your
+                registered mobile number.
+            </span>
+
+        </div>
+
+
+
+        <!-- =====================================
+             MOBILE
+        ====================================== -->
+
+        <div class="field-group">
+
+            <label
+                class="field-label"
+                for="mobile"
+            >
+                Registered Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                id="mobile"
+                placeholder="Enter 10-digit mobile number"
+                maxlength="10"
+                minlength="10"
+                pattern="[6-9][0-9]{9}"
+                inputmode="numeric"
+                autocomplete="tel"
+            >
+
+        </div>
+
 
         <button
             type="button"
-            id="verifyOtpButton"
-            style="display: none;"
+            id="sendOtpButton"
+            class="action-button"
         >
-            Verify OTP
+            📱 Send OTP
         </button>
+
+
+
+        <!-- =====================================
+             OTP
+        ====================================== -->
+
+        <div id="otpSection">
+
+            <p class="otp-title">
+                Enter Verification OTP
+            </p>
+
+            <p class="otp-subtitle">
+                Enter the 6-digit OTP sent to your mobile.
+            </p>
+
+            <div class="field-group">
+
+                <input
+                    type="text"
+                    id="otp"
+                    placeholder="Enter 6-digit OTP"
+                    maxlength="6"
+                    inputmode="numeric"
+                    style="display: none;"
+                >
+
+            </div>
+
+            <button
+                type="button"
+                id="verifyOtpButton"
+                class="action-button"
+                style="display: none;"
+            >
+                ✓ Verify OTP
+            </button>
+
+        </div>
+
+
+
+        <!-- =====================================
+             MESSAGE
+        ====================================== -->
 
         <p id="message"></p>
 
-        <p id="usernameResult"></p>
 
-        <p>
-            <a href="/login.html">Back to Login</a>
-        </p>
+
+        <!-- =====================================
+             USERNAME RESULT
+        ====================================== -->
+
+        <p
+            id="usernameResult"
+            style="display:none;"
+        ></p>
+
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <div class="forgot-footer">
+
+            <a href="/login.html">
+                ← Back to Login
+            </a>
+
+            <div class="create-account">
+
+                Don't have an account?
+
+                <a href="/register.html">
+                    Create Account
+                </a>
+
+            </div>
+
+            <div class="security-note">
+                🔒 Your information is securely protected.
+            </div>
+
+        </div>
+
 
     </div>
 
+
+
+    <!-- EXISTING LOGIC -->
+
     <script src="forgot-username.js"></script>
+
+
+    <!-- =====================================
+         SHOW OTP SECTION WHEN OTP INPUT APPEARS
+    ====================================== -->
+
+    <script>
+
+        const otpObserver =
+            new MutationObserver(() => {
+
+                const otpInput =
+                    document.getElementById("otp");
+
+                const otpSection =
+                    document.getElementById("otpSection");
+
+                if (
+                    otpInput &&
+                    otpInput.style.display !== "none"
+                ) {
+
+                    otpSection.style.display = "block";
+
+                }
+
+            });
+
+
+        otpObserver.observe(
+            document.body,
+            {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ["style"]
+            }
+        );
+
+
+        /* =====================================
+           SHOW USERNAME RESULT
+        ===================================== */
+
+        const usernameResult =
+            document.getElementById(
+                "usernameResult"
+            );
+
+
+        const resultObserver =
+            new MutationObserver(() => {
+
+                if (
+                    usernameResult.textContent.trim()
+                ) {
+
+                    usernameResult.style.display =
+                        "block";
+
+                }
+
+            });
+
+
+        resultObserver.observe(
+            usernameResult,
+            {
+                childList: true,
+                characterData: true,
+                subtree: true
+            }
+        );
+
+    </script>
+
 
 </body>
 
