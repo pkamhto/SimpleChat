@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Private Chat - SimpleChat</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =================================
+           CHAT HEADER
+        ================================= */
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .chat-profile-picture {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .chat-user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-user-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .chat-user-status {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* =================================
+           SETTINGS BUTTON
+        ================================= */
+
+        .chat-settings-button {
+            width: 40px;
+            height: 40px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: transparent;
+            color: white;
+
+            font-size: 21px;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-settings-button:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+
+        /* =================================
+           SETTINGS PANEL
+        ================================= */
+
+        .chat-settings-panel {
+
+            position: fixed;
+
+            top: 0;
+            right: -360px;
+
+            width: 340px;
+            max-width: 90%;
+
+            height: 100vh;
+
+            background: white;
+
+            z-index: 1000;
+
+            box-shadow:
+                -4px 0 15px
+                rgba(0,0,0,0.2);
+
+            transition:
+                right 0.25s ease;
+
+            overflow-y: auto;
+
+        }
+
+
+        .chat-settings-panel.open {
+            right: 0;
+        }
+
+
+        /* =================================
+           SETTINGS HEADER
+        ================================= */
+
+        .settings-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 16px;
+
+            background: #075e54;
+
+            color: white;
+
+        }
+
+        .settings-header h3 {
+            margin: 0;
+        }
+
+        .settings-close-button {
+
+            border: none;
+
+            background: transparent;
+
+            color: white;
+
+            font-size: 24px;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =================================
+           SETTINGS CONTENT
+        ================================= */
+
+        .settings-content {
+            padding: 18px;
+        }
+
+
+        .settings-section {
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .settings-section-title {
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+            color: #555;
+
+        }
+
+
+        /* =================================
+           OPTION BUTTONS
+        ================================= */
+
+        .settings-options {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 8px;
+
+        }
+
+
+        .settings-option {
+
+            padding: 10px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 8px;
+
+            background: #f8f8f8;
+
+            cursor: pointer;
+
+            text-align: center;
+
+            font-size: 13px;
+
+        }
+
+
+        .settings-option:hover {
+            background: #eeeeee;
+        }
+
+
+        .settings-option.active {
+
+            border-color: #075e54;
+
+            background: #e7f5f2;
+
+            color: #075e54;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =================================
+           WALLPAPER
+        ================================= */
+
+        .wallpaper-button {
+
+            width: 100%;
+
+            padding: 11px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #075e54;
+
+            color: white;
+
+            cursor: pointer;
+
+        }
+
+
+        .reset-settings-button {
+
+            width: 100%;
+
+            padding: 11px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #ddd;
+
+            color: #333;
+
+            cursor: pointer;
+
+            margin-top: 8px;
+
+        }
+
+
+        /* =================================
+           SETTINGS OVERLAY
+        ================================= */
+
+        .settings-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,0.35);
+
+            z-index: 999;
+
+            display: none;
+
+        }
+
+
+        .settings-overlay.show {
+            display: block;
+        }
+
+
+        /* =================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 500px) {
+
+            .chat-settings-panel {
+
+                width: 90%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         CHAT
+    ================================= -->
+
+    <div class="chat-container">
+
+
+        <!-- HEADER -->
+
+        <div class="chat-header">
+
+
+            <button
+                type="button"
+                id="backButton"
+                class="back-button"
+            >
+                ←
+            </button>
+
+
+            <div class="chat-user-info">
+
+
+                <img
+                    id="chatProfilePicture"
+                    class="chat-profile-picture"
+                    src=""
+                    alt="Profile Picture"
+                >
+
+
+                <div class="chat-user-details">
+
+
+                    <div
+                        id="chatUserName"
+                        class="chat-user-name"
+                    >
+                        Private Chat
+                    </div>
+
+
+                    <div
+                        id="chatUserStatus"
+                        class="chat-user-status"
+                    >
+                        Connecting...
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- SETTINGS -->
+
+            <button
+                type="button"
+                id="chatSettingsButton"
+                class="chat-settings-button"
+                title="Chat Settings"
+            >
+                ⚙️
+            </button>
+
+
+        </div>
+
+
+        <!-- MESSAGES -->
+
+        <div id="messages">
+
+            <div class="loading-message">
+                Loading messages...
+            </div>
+
+        </div>
+
+
+        <!-- MESSAGE INPUT -->
+
+        <form id="chatForm">
+
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Type a message..."
+                autocomplete="off"
+                required
+            >
+
+
+            <button
+                type="submit"
+                id="sendButton"
+            >
+                ➤
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+
+    <!-- =================================
+         SETTINGS OVERLAY
+    ================================= -->
+
+    <div
+        id="settingsOverlay"
+        class="settings-overlay"
+    ></div>
+
+
+
+    <!-- =================================
+         SETTINGS PANEL
+    ================================= -->
+
+    <div
+        id="chatSettingsPanel"
+        class="chat-settings-panel"
+    >
+
+
+        <!-- SETTINGS HEADER -->
+
+        <div class="settings-header">
+
+
+            <h3>
+                ⚙️ Chat Settings
+            </h3>
+
+
+            <button
+                type="button"
+                id="closeSettingsButton"
+                class="settings-close-button"
+            >
+                ×
+            </button>
+
+
+        </div>
+
+
+
+        <!-- SETTINGS CONTENT -->
+
+        <div class="settings-content">
+
+
+            <!-- THEME -->
+
+            <div class="settings-section">
+
+
+                <div class="settings-section-title">
+                    🎨 Chat Theme
+                </div>
+
+
+                <div class="settings-options">
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="theme"
+                        data-value="green"
+                    >
+                        🟢 Green
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="theme"
+                        data-value="blue"
+                    >
+                        🔵 Blue
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="theme"
+                        data-value="purple"
+                    >
+                        🟣 Purple
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="theme"
+                        data-value="orange"
+                    >
+                        🟠 Orange
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="theme"
+                        data-value="pink"
+                    >
+                        🩷 Pink
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="theme"
+                        data-value="dark"
+                    >
+                        ⚫ Dark
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- APPEARANCE -->
+
+            <div class="settings-section">
+
+
+                <div class="settings-section-title">
+                    🌓 Appearance
+                </div>
+
+
+                <div class="settings-options">
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="appearance"
+                        data-value="light"
+                    >
+                        ☀️ Light
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="appearance"
+                        data-value="dark"
+                    >
+                        🌙 Dark
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FONT SIZE -->
+
+            <div class="settings-section">
+
+
+                <div class="settings-section-title">
+                    🔤 Font Size
+                </div>
+
+
+                <div class="settings-options">
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="fontSize"
+                        data-value="small"
+                    >
+                        Small
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="fontSize"
+                        data-value="medium"
+                    >
+                        Medium
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="fontSize"
+                        data-value="large"
+                    >
+                        Large
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MESSAGE STYLE -->
+
+            <div class="settings-section">
+
+
+                <div class="settings-section-title">
+                    💬 Message Style
+                </div>
+
+
+                <div class="settings-options">
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="bubble"
+                        data-value="rounded"
+                    >
+                        Rounded
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="bubble"
+                        data-value="compact"
+                    >
+                        Compact
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="bubble"
+                        data-value="square"
+                    >
+                        Square
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CHAT DENSITY -->
+
+            <div class="settings-section">
+
+
+                <div class="settings-section-title">
+                    📐 Chat Density
+                </div>
+
+
+                <div class="settings-options">
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="density"
+                        data-value="compact"
+                    >
+                        Compact
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="density"
+                        data-value="comfortable"
+                    >
+                        Comfortable
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-option"
+                        data-setting="density"
+                        data-value="spacious"
+                    >
+                        Spacious
+                    </button>
+
+
+                </div>
+
+            </div>
+
+            <!-- CUSTOM COLORS -->
+
+<div class="settings-section">
+
+    <h4>🎨 Custom Colors</h4>
+
+    <label class="color-setting">
+        <span>My Message Color</span>
+
+        <input
+            type="color"
+            id="sentColorPicker"
+            value="#d9fdd3"
+        >
+    </label>
+
+
+    <label class="color-setting">
+        <span>Received Message Color</span>
+
+        <input
+            type="color"
+            id="receivedColorPicker"
+            value="#ffffff"
+        >
+    </label>
+
+
+    <label class="color-setting">
+        <span>Accent Color</span>
+
+        <input
+            type="color"
+            id="accentColorPicker"
+            value="#075e54"
+        >
+    </label>
+
+</div>
+
+
+
+            <!-- WALLPAPER -->
+
+            <div class="settings-section">
+
+
+                <div class="settings-section-title">
+                    🖼️ Chat Wallpaper
+                </div>
+
+
+                <input
+                    type="file"
+                    id="wallpaperInput"
+                    accept="image/*"
+                    hidden
+                >
+
+
+                <button
+                    type="button"
+                    id="wallpaperButton"
+                    class="wallpaper-button"
+                >
+                    Choose Wallpaper
+                </button>
+
+
+                <button
+                    type="button"
+                    id="resetSettingsButton"
+                    class="reset-settings-button"
+                >
+                    Reset to Default
+                </button>
+
+
+            </div>
+
+            
+
+</div>
+
+
+        </div>
+
+    </div>
+
+    
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="chat.js"></script>
+
+
+</body>
+
+</html>

@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "crypto": "^1.0.1",
+    "dotenv": "^18.0.4",
     "express": "^5.2.1",
+    "mongoose": "^9.10.2",
     "socket.io": "^4.8.4"
   }
 }

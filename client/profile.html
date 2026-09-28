@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Profile - SimpleChat</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        .profile-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .profile-content {
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        /* PROFILE PHOTO */
+
+        .profile-photo-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .profile-photo-wrapper {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #075e54;
+            background: #eeeeee;
+        }
+
+        .profile-photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        #changePhotoButton {
+            border: none;
+            background: #075e54;
+            color: white;
+            padding: 9px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* PROFILE FIELDS */
+
+        .profile-field {
+            margin-bottom: 18px;
+        }
+
+        .profile-field label {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .profile-field-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-field input,
+        .profile-field select {
+            flex: 1;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 12px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            background: #f5f5f5;
+            font-size: 15px;
+        }
+
+        .profile-field input:disabled,
+        .profile-field select:disabled {
+            color: #333;
+            cursor: default;
+        }
+
+        .edit-button,
+        .save-field-button,
+        .cancel-field-button {
+            border: none;
+            border-radius: 8px;
+            padding: 9px 12px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .edit-button {
+            background: #075e54;
+            color: white;
+        }
+
+        .save-field-button {
+            background: #128c7e;
+            color: white;
+        }
+
+        .cancel-field-button {
+            background: #dddddd;
+            color: #333;
+        }
+
+        .field-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .mobile-note {
+            display: block;
+            margin-top: 5px;
+            font-size: 11px;
+            color: #777;
+        }
+
+        #profileMessage {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="chat-container profile-container">
+
+        <!-- HEADER -->
+
+        <div class="chat-header">
+
+            <button
+                type="button"
+                id="backButton"
+                class="back-button"
+            >
+                ←
+            </button>
+
+            <div class="chat-user-info">
+
+                <div class="chat-user-name">
+                    My Profile
+                </div>
+
+                <div class="chat-user-status">
+                    SimpleChat Account
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <div class="profile-content">
+
+
+            <!-- PROFILE PHOTO -->
+
+            <div class="profile-photo-section">
+
+                <div class="profile-photo-wrapper">
+
+                    <img
+                        id="profilePicture"
+                        src=""
+                        alt="Profile Picture"
+                    >
+
+                </div>
+
+                <input
+                    type="file"
+                    id="profilePictureInput"
+                    accept="image/*"
+                    hidden
+                >
+
+                <button
+                    type="button"
+                    id="changePhotoButton"
+                >
+                    🖼️ Change Photo
+                </button>
+
+            </div>
+
+
+            <!-- FULL NAME -->
+
+            <div class="profile-field">
+
+                <label>
+                    Full Name
+                </label>
+
+                <div class="profile-field-row">
+
+                    <input
+                        type="text"
+                        id="name"
+                        disabled
+                    >
+
+                    <div class="field-actions">
+
+                        <button
+                            type="button"
+                            class="edit-button"
+                            data-field="name"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            type="button"
+                            class="save-field-button"
+                            data-field="name"
+                            hidden
+                        >
+                            Save
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cancel-field-button"
+                            data-field="name"
+                            hidden
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- USERNAME -->
+
+            <div class="profile-field">
+
+                <label>
+                    Username
+                </label>
+
+                <div class="profile-field-row">
+
+                    <input
+                        type="text"
+                        id="username"
+                        disabled
+                    >
+
+                    <div class="field-actions">
+
+                        <button
+                            type="button"
+                            class="edit-button"
+                            data-field="username"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            type="button"
+                            class="save-field-button"
+                            data-field="username"
+                            hidden
+                        >
+                            Save
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cancel-field-button"
+                            data-field="username"
+                            hidden
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DATE OF BIRTH -->
+
+            <div class="profile-field">
+
+                <label>
+                    Date of Birth
+                </label>
+
+                <div class="profile-field-row">
+
+                    <input
+                        type="date"
+                        id="dateOfBirth"
+                        disabled
+                    >
+
+                    <div class="field-actions">
+
+                        <button
+                            type="button"
+                            class="edit-button"
+                            data-field="dateOfBirth"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            type="button"
+                            class="save-field-button"
+                            data-field="dateOfBirth"
+                            hidden
+                        >
+                            Save
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cancel-field-button"
+                            data-field="dateOfBirth"
+                            hidden
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- GENDER -->
+
+            <div class="profile-field">
+
+                <label>
+                    Gender
+                </label>
+
+                <div class="profile-field-row">
+
+                    <select
+                        id="gender"
+                        disabled
+                    >
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                    <div class="field-actions">
+
+                        <button
+                            type="button"
+                            class="edit-button"
+                            data-field="gender"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            type="button"
+                            class="save-field-button"
+                            data-field="gender"
+                            hidden
+                        >
+                            Save
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cancel-field-button"
+                            data-field="gender"
+                            hidden
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <div class="profile-field">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <div class="profile-field-row">
+
+                    <input
+                        type="text"
+                        id="mobile"
+                        disabled
+                    >
+
+                    <button
+                        type="button"
+                        class="edit-button"
+                        id="editMobileButton"
+                    >
+                        Edit
+                    </button>
+
+                </div>
+
+                <small class="mobile-note">
+                    Mobile number change requires OTP verification.
+                </small>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="profile-field">
+
+                <label>
+                    Email
+                </label>
+
+                <div class="profile-field-row">
+
+                    <input
+                        type="email"
+                        id="email"
+                        disabled
+                    >
+
+                    <div class="field-actions">
+
+                        <button
+                            type="button"
+                            class="edit-button"
+                            data-field="email"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            type="button"
+                            class="save-field-button"
+                            data-field="email"
+                            hidden
+                        >
+                            Save
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cancel-field-button"
+                            data-field="email"
+                            hidden
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="profile-field">
+
+                <button
+                    type="button"
+                    id="changePasswordButton"
+                >
+                    🔒 Change Password
+                </button>
+
+            </div>
+
+
+            <p id="profileMessage"></p>
+
+
+        </div>
+
+    </div>
+
+
+    <script src="profile.js"></script>
+
+</body>
+
+</html>

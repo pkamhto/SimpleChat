@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Users - SimpleChat</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="chat-container">
+
+        <h2>SimpleChat Users</h2>
+
+
+        <!-- ========================= -->
+        <!-- CURRENT USER -->
+        <!-- ========================= -->
+
+        <div id="currentUser"></div>
+
+
+        <!-- ========================= -->
+        <!-- FRIEND REQUESTS -->
+        <!-- ========================= -->
+
+        <h3>Friend Requests</h3>
+
+        <div id="friendRequests">
+
+            <p>No pending requests.</p>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- ALL USERS -->
+        <!-- ========================= -->
+
+        <h3>All Users</h3>
+
+        <div id="usersList">
+
+            <p>Loading users...</p>
+
+        </div>
+
+
+        <br>
+
+        <button
+            type="button"
+            id="logoutButton"
+        >
+            Logout
+        </button>
+
+    </div>
+
+
+    <!-- Socket.IO MUST LOAD BEFORE users.js -->
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="users.js"></script>
+
+</body>
+
+</html>
