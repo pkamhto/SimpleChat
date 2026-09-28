@@ -10,72 +10,970 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Users - SimpleChat</title>
+    <title>SimpleChat - Users</title>
 
     <link
         rel="stylesheet"
         href="style.css"
     >
 
+    <style>
+
+        /* =========================================
+           USERS PAGE
+        ========================================= */
+
+        body.users-page {
+
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8f5f2 0%,
+                    #f4f7fb 45%,
+                    #eaf1ff 100%
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+
+            padding: 30px 15px;
+
+            color: #172033;
+
+        }
+
+
+        /* =========================================
+           MAIN APP
+        ========================================= */
+
+        .users-app {
+
+            width: 100%;
+            max-width: 900px;
+
+            background: #ffffff;
+
+            border-radius: 24px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px
+                rgba(25, 45, 75, 0.14);
+
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .users-header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075e54,
+                    #128c7e
+                );
+
+            color: white;
+
+            padding: 24px 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+        }
+
+
+        .brand-section {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+        }
+
+
+        .brand-logo {
+
+            width: 48px;
+            height: 48px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,0.18);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+
+            box-shadow:
+                inset 0 0 0 1px
+                rgba(255,255,255,0.15);
+
+        }
+
+
+        .brand-title {
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            margin: 0;
+
+        }
+
+
+        .brand-subtitle {
+
+            font-size: 13px;
+
+            opacity: 0.85;
+
+            margin-top: 4px;
+
+        }
+
+
+        .header-actions {
+
+            display: flex;
+
+            gap: 8px;
+
+        }
+
+
+        .header-button {
+
+            text-decoration: none;
+
+            color: white;
+
+            border: 1px solid
+                rgba(255,255,255,0.3);
+
+            background:
+                rgba(255,255,255,0.12);
+
+            padding: 9px 14px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: 0.2s ease;
+
+        }
+
+
+        .header-button:hover {
+
+            background:
+                rgba(255,255,255,0.22);
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =========================================
+           CONTENT
+        ========================================= */
+
+        .users-content {
+
+            padding: 25px;
+
+        }
+
+
+        /* =========================================
+           CURRENT USER CARD
+        ========================================= */
+
+        #currentUser {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0faf8,
+                    #f8fbff
+                );
+
+            border: 1px solid #e1eeec;
+
+            border-radius: 18px;
+
+            padding: 17px 20px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        #currentUser > div {
+
+            margin: 0 !important;
+
+        }
+
+
+        #currentUser img {
+
+            width: 62px !important;
+            height: 62px !important;
+
+            border: 3px solid
+                #128c7e !important;
+
+            box-shadow:
+                0 4px 12px
+                rgba(18,140,126,0.18);
+
+        }
+
+
+        #currentUser strong {
+
+            color: #657080;
+
+            font-size: 12px;
+
+            display: block;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        #currentUser small {
+
+            color: #128c7e;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =========================================
+           SECTION
+        ========================================= */
+
+        .page-section {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .section-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .section-title {
+
+            margin: 0;
+
+            font-size: 18px;
+
+            color: #172033;
+
+        }
+
+
+        .section-label {
+
+            color: #7b8492;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================
+           FRIEND REQUESTS
+        ========================================= */
+
+        #friendRequests {
+
+            background: #fafbfc;
+
+            border: 1px solid #e8ebef;
+
+            border-radius: 16px;
+
+            padding: 14px;
+
+        }
+
+
+        #friendRequests > p {
+
+            margin: 8px;
+
+            color: #8a929e;
+
+            font-size: 14px;
+
+            text-align: center;
+
+        }
+
+
+        .friend-request {
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            gap: 13px !important;
+
+            padding: 13px !important;
+
+            margin-bottom: 10px !important;
+
+            background: white !important;
+
+            border: 1px solid #edf0f3 !important;
+
+            border-radius: 14px !important;
+
+            box-shadow:
+                0 4px 12px
+                rgba(30,50,80,0.05);
+
+        }
+
+
+        .friend-request:last-child {
+
+            margin-bottom: 0 !important;
+
+        }
+
+
+        .friend-request img {
+
+            width: 48px !important;
+            height: 48px !important;
+
+            border-radius: 50% !important;
+
+            border: 2px solid #dcebe8;
+
+        }
+
+
+        .friend-request button {
+
+            border: none;
+
+            padding: 8px 13px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+        }
+
+
+        .accept-request {
+
+            background: #128c7e;
+
+            color: white;
+
+        }
+
+
+        .accept-request:hover {
+
+            background: #0b776b;
+
+        }
+
+
+        .reject-request {
+
+            background: #f1f3f5;
+
+            color: #555d68;
+
+        }
+
+
+        .reject-request:hover {
+
+            background: #e5e7ea;
+
+        }
+
+
+        /* =========================================
+           USERS LIST
+        ========================================= */
+
+        #usersList {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 14px;
+
+        }
+
+
+        #usersList > p {
+
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            color: #8a929e;
+
+            padding: 30px;
+
+        }
+
+
+        /* =========================================
+           USER CARD
+        ========================================= */
+
+        .user-item {
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            gap: 14px !important;
+
+            padding: 16px !important;
+
+            margin-bottom: 0 !important;
+
+            background: white !important;
+
+            border: 1px solid #e8edf1 !important;
+
+            border-radius: 17px !important;
+
+            box-shadow:
+                0 5px 18px
+                rgba(30,50,80,0.06) !important;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+
+        }
+
+
+        .user-item:hover {
+
+            transform: translateY(-3px);
+
+            border-color: #b9ddd7 !important;
+
+            box-shadow:
+                0 10px 25px
+                rgba(30,50,80,0.10) !important;
+
+        }
+
+
+        .user-item > img {
+
+            width: 62px !important;
+            height: 62px !important;
+
+            min-width: 62px !important;
+
+            border-radius: 50% !important;
+
+            object-fit: cover;
+
+            border: 3px solid
+                #dcefeb !important;
+
+        }
+
+
+        .user-item strong {
+
+            color: #172033;
+
+            font-size: 16px !important;
+
+            font-weight: 700;
+
+        }
+
+
+        .user-item small {
+
+            color: #89919d !important;
+
+            font-size: 12px;
+
+        }
+
+
+        .user-item > div {
+
+            min-width: 0;
+
+        }
+
+
+        /* =========================================
+           ONLINE STATUS
+        ========================================= */
+
+        .user-item div[style*="color:#128c7e"] {
+
+            color: #128c7e !important;
+
+            font-size: 12px !important;
+
+            font-weight: 600;
+
+        }
+
+
+        .user-item div[style*="color:#777"] {
+
+            color: #8a929e !important;
+
+            font-size: 12px !important;
+
+        }
+
+
+        /* =========================================
+           CHAT BUTTON
+        ========================================= */
+
+        .chat-button {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075e54,
+                    #128c7e
+                ) !important;
+
+            color: white !important;
+
+            border: none !important;
+
+            border-radius: 10px !important;
+
+            padding: 8px 15px !important;
+
+            font-size: 12px !important;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 4px 10px
+                rgba(18,140,126,0.18);
+
+            transition: 0.2s ease;
+
+        }
+
+
+        .chat-button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 14px
+                rgba(18,140,126,0.25);
+
+        }
+
+
+        /* =========================================
+           UNREAD
+        ========================================= */
+
+        .user-item span[style*="color:red"] {
+
+            color: #d9364f !important;
+
+            background: #fff0f2;
+
+            padding: 5px 8px;
+
+            border-radius: 8px;
+
+            margin-left: 5px !important;
+
+            font-size: 11px !important;
+
+        }
+
+
+        /* =========================================
+           LOGOUT
+        ========================================= */
+
+        .logout-area {
+
+            margin-top: 8px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #edf0f3;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+        }
+
+
+        #logoutButton {
+
+            border: none;
+
+            background: #fff1f2;
+
+            color: #d9364f;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+
+        }
+
+
+        #logoutButton:hover {
+
+            background: #ffe1e5;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            body.users-page {
+
+                padding: 0;
+
+            }
+
+
+            .users-app {
+
+                min-height: 100vh;
+
+                border-radius: 0;
+
+            }
+
+
+            .users-header {
+
+                padding: 20px;
+
+            }
+
+
+            .users-content {
+
+                padding: 18px;
+
+            }
+
+
+            #usersList {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .header-button {
+
+                padding: 8px 10px;
+
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .users-header {
+
+                align-items: flex-start;
+
+            }
+
+
+            .brand-title {
+
+                font-size: 19px;
+
+            }
+
+
+            .brand-subtitle {
+
+                font-size: 11px;
+
+            }
+
+
+            .header-actions {
+
+                flex-direction: column;
+
+            }
+
+
+            .header-button {
+
+                text-align: center;
+
+                font-size: 11px;
+
+            }
+
+
+            .friend-request {
+
+                flex-wrap: wrap;
+
+            }
+
+
+            .friend-request .accept-request,
+            .friend-request .reject-request {
+
+                flex: 1;
+
+            }
+
+        }
+
+    </style>
+
 </head>
 
-<body>
 
-    <div class="chat-container">
-
-        <h2>SimpleChat Users</h2>
+<body class="users-page">
 
 
-        <!-- ========================= -->
-        <!-- CURRENT USER -->
-        <!-- ========================= -->
-
-        <div id="currentUser"></div>
+    <div class="users-app">
 
 
-        <!-- ========================= -->
-        <!-- FRIEND REQUESTS -->
-        <!-- ========================= -->
+        <!-- =====================================
+             HEADER
+        ====================================== -->
 
-        <h3>Friend Requests</h3>
+        <header class="users-header">
 
-        <div id="friendRequests">
+            <div class="brand-section">
 
-            <p>No pending requests.</p>
+                <div class="brand-logo">
+                    💬
+                </div>
 
-        </div>
+                <div>
+
+                    <h1 class="brand-title">
+                        SimpleChat
+                    </h1>
+
+                    <div class="brand-subtitle">
+                        Connect. Chat. Stay Connected.
+                    </div>
+
+                </div>
+
+            </div>
 
 
-        <!-- ========================= -->
-        <!-- ALL USERS -->
-        <!-- ========================= -->
+            <div class="header-actions">
 
-        <h3>All Users</h3>
+                <a
+                    href="/profile.html"
+                    class="header-button"
+                >
+                    👤 Profile
+                </a>
 
-        <div id="usersList">
+            </div>
 
-            <p>Loading users...</p>
-
-        </div>
+        </header>
 
 
-        <br>
 
-        <button
-            type="button"
-            id="logoutButton"
-        >
-            Logout
-        </button>
+        <!-- =====================================
+             MAIN CONTENT
+        ====================================== -->
+
+        <main class="users-content">
+
+
+            <!-- CURRENT USER -->
+
+            <section class="page-section">
+
+                <div id="currentUser"></div>
+
+            </section>
+
+
+
+            <!-- FRIEND REQUESTS -->
+
+            <section class="page-section">
+
+                <div class="section-heading">
+
+                    <h2 class="section-title">
+                        Friend Requests
+                    </h2>
+
+                    <span class="section-label">
+                        Manage connections
+                    </span>
+
+                </div>
+
+
+                <div id="friendRequests">
+
+                    <p>
+                        No pending requests.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ALL USERS -->
+
+            <section class="page-section">
+
+                <div class="section-heading">
+
+                    <h2 class="section-title">
+                        People on SimpleChat
+                    </h2>
+
+                    <span class="section-label">
+                        Start a conversation
+                    </span>
+
+                </div>
+
+
+                <div id="usersList">
+
+                    <p>
+                        Loading users...
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- LOGOUT -->
+
+            <div class="logout-area">
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                >
+                    🚪 Logout
+                </button>
+
+            </div>
+
+
+        </main>
+
 
     </div>
 
 
-    <!-- Socket.IO MUST LOAD BEFORE users.js -->
+
+    <!-- =====================================
+         SOCKET.IO
+    ====================================== -->
 
     <script src="/socket.io/socket.io.js"></script>
 
     <script src="users.js"></script>
+
 
 </body>
 
