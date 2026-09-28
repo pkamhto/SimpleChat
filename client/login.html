@@ -2,56 +2,748 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Login - SimpleChat</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075e54 0%,
+                    #128c7e 50%,
+                    #25d366 100%
+                );
+
+        }
+
+
+        .page {
+
+            width: 100%;
+
+            max-width: 420px;
+
+        }
+
+
+        .login-card {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.97
+                );
+
+            border-radius: 24px;
+
+            padding: 38px 32px 32px;
+
+            box-shadow:
+                0 25px 60px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.25
+                );
+
+        }
+
+
+        .logo {
+
+            width: 76px;
+
+            height: 76px;
+
+            margin:
+                0 auto 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075e54,
+                    #25d366
+                );
+
+            color: white;
+
+            font-size: 38px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(
+                    7,
+                    94,
+                    84,
+                    0.3
+                );
+
+        }
+
+
+        .brand {
+
+            text-align: center;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .brand h1 {
+
+            margin: 0;
+
+            color: #075e54;
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+        }
+
+
+        .brand p {
+
+            margin:
+                8px 0 0;
+
+            color: #777;
+
+            font-size: 14px;
+
+        }
+
+
+        .input-group {
+
+            margin-bottom: 17px;
+
+        }
+
+
+        .input-label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #333;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 18px;
+
+            opacity: 0.7;
+
+        }
+
+
+        .input-wrapper input {
+
+            width: 100%;
+
+            height: 52px;
+
+            padding:
+                0 46px;
+
+            border:
+                1px solid #d9d9d9;
+
+            border-radius: 13px;
+
+            outline: none;
+
+            background: #f8f9fa;
+
+            font-size: 15px;
+
+            color: #222;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s,
+                background 0.2s;
+
+        }
+
+
+        .input-wrapper input:focus {
+
+            background: #fff;
+
+            border-color:
+                #128c7e;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    18,
+                    140,
+                    126,
+                    0.12
+                );
+
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 13px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            opacity: 0.65;
+
+        }
+
+
+        .password-toggle:hover {
+
+            opacity: 1;
+
+        }
+
+
+        #loginMessage {
+
+            min-height: 20px;
+
+            margin:
+                8px 0 14px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            color: #d32f2f;
+
+        }
+
+
+        .login-button {
+
+            width: 100%;
+
+            height: 52px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075e54,
+                    #128c7e
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 18px
+                rgba(
+                    7,
+                    94,
+                    84,
+                    0.25
+                );
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+
+        }
+
+
+        .login-button:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 11px 23px
+                rgba(
+                    7,
+                    94,
+                    84,
+                    0.32
+                );
+
+        }
+
+
+        .login-button:active {
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        .forgot-links {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-top: 19px;
+
+            font-size: 13px;
+
+        }
+
+
+        .forgot-links a {
+
+            color:
+                #075e54;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+
+        .forgot-links a:hover {
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        .divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin:
+                25px 0;
+
+            color: #aaa;
+
+            font-size: 12px;
+
+        }
+
+
+        .divider::before,
+        .divider::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: #e5e5e5;
+
+        }
+
+
+        .register-text {
+
+            text-align: center;
+
+            margin: 0;
+
+            color: #666;
+
+            font-size: 14px;
+
+        }
+
+
+        .register-link {
+
+            display: inline-block;
+
+            margin-top: 10px;
+
+            color:
+                #075e54;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+        }
+
+
+        .register-link:hover {
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        .security {
+
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #999;
+
+            font-size: 11px;
+
+        }
+
+
+        @media (
+            max-width: 480px
+        ) {
+
+            body {
+
+                padding: 14px;
+
+            }
+
+
+            .login-card {
+
+                padding:
+                    32px 22px 25px;
+
+                border-radius:
+                    20px;
+
+            }
+
+
+            .brand h1 {
+
+                font-size:
+                    27px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <div class="chat-container">
+    <div class="page">
 
-        <h2>Login</h2>
+        <div class="login-card">
 
-        <form id="loginForm">
 
-            <input
-                type="text"
-                id="loginId"
-                placeholder="Username / Email / Mobile"
-                required
-            >
+            <div class="logo">
+                💬
+            </div>
 
-            <input
-                type="password"
-                id="loginPassword"
-                placeholder="Password"
-                required
-            >
 
-            <button type="submit">
-                Login
-            </button>   
+            <div class="brand">
 
-            <p>
-    <a href="/forgot-username.html">Forgot Username?</a>
-    |
-    <a href="/forgot-password.html">Forgot Password?</a>
-</p>
+                <h1>
+                    Welcome Back
+                </h1>
 
-        </form>
+                <p>
+                    Login to your SimpleChat account
+                </p>
 
-        <p id="loginMessage"></p>
+            </div>
 
-        <p>
-            Don't have an account?
-            <a href="/register.html">Create Account</a>
-        </p>
+
+            <form id="loginForm">
+
+
+                <div class="input-group">
+
+                    <label
+                        class="input-label"
+                        for="loginId"
+                    >
+                        Username, Email or Mobile
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            👤
+                        </span>
+
+
+                        <input
+                            type="text"
+                            id="loginId"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label
+                        class="input-label"
+                        for="loginPassword"
+                    >
+                        Password
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Show password"
+                        >
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <p id="loginMessage"></p>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Login
+                </button>
+
+
+                <div class="forgot-links">
+
+                    <a
+                        href="/forgot-username.html"
+                    >
+                        Forgot Username?
+                    </a>
+
+
+                    <span>
+                        •
+                    </span>
+
+
+                    <a
+                        href="/forgot-password.html"
+                    >
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+            </form>
+
+
+            <div class="divider">
+                OR
+            </div>
+
+
+            <p class="register-text">
+                Don't have an account?
+            </p>
+
+
+            <div style="text-align:center;">
+
+                <a
+                    href="/register.html"
+                    class="register-link"
+                >
+                    Create a New Account →
+                </a>
+
+            </div>
+
+
+            <div class="security">
+
+                🔒 Your account is protected by
+                SimpleChat security
+
+            </div>
+
+
+        </div>
 
     </div>
+
+
+    <script>
+
+        const passwordInput =
+            document.getElementById(
+                "loginPassword"
+            );
+
+
+        const passwordToggle =
+            document.getElementById(
+                "passwordToggle"
+            );
+
+
+        passwordToggle.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    passwordInput.type ===
+                    "password"
+                ) {
+
+                    passwordInput.type =
+                        "text";
+
+                    passwordToggle.textContent =
+                        "🙈";
+
+                    passwordToggle.setAttribute(
+                        "aria-label",
+                        "Hide password"
+                    );
+
+                } else {
+
+                    passwordInput.type =
+                        "password";
+
+                    passwordToggle.textContent =
+                        "👁️";
+
+                    passwordToggle.setAttribute(
+                        "aria-label",
+                        "Show password"
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
 
     <script src="login.js"></script>
 
